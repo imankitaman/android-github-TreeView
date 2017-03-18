@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import ankit.com.githubtreeview.R;
 import ankit.com.githubtreeview.model.FileBean;
@@ -29,15 +30,15 @@ public class MainActivity extends AppCompatActivity {
     private List<FileBean> mDatas = new ArrayList<>();
     private NetworkManager networkmanager;
     private CompositeSubscription compositeSubscription;
+    private List<String> dirsCalled;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        dirsCalled = new ArrayList<>();
         compositeSubscription = new CompositeSubscription();
-//        initData();
-
         networkmanager = new NetworkManager();
         compositeSubscription.add(networkmanager.loadMainContent().subscribe(new Observer<List<Repo>>() {
             @Override
@@ -68,8 +69,12 @@ public class MainActivity extends AppCompatActivity {
             public boolean onLongClick(View v) {
                 final FileBean file = (FileBean) v.getTag();
                 final FileBean fileBean = mDatas.get(mDatas.indexOf(file));
-                if (file.getRepoInfo().getName().equalsIgnoreCase("dir"))
-                onNextUrl(file,fileBean.getRepoInfo().getUrl());
+                final String typeName = file.getRepoInfo().getType();
+                Log.d("dir file Type for next ", typeName);
+                if ("dir".equalsIgnoreCase(typeName) && !dirsCalled.contains(file.getRepoInfo().getName())) {
+                    dirsCalled.add(file.getRepoInfo().getName());
+                    onNextUrl(file, fileBean.getRepoInfo().getUrl());
+                }
                 return false;
             }
         };
@@ -107,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onNext(List<Repo> Files) {
-                Toast.makeText(MainActivity.this, "onSuccess +" + Files.get(1).getName(), Toast.LENGTH_SHORT).show();
                 Log.d("onNext call", Files.toString());
                 try {
                     getData(file, Files);
