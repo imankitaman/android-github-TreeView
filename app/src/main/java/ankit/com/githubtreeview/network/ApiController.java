@@ -2,7 +2,6 @@ package ankit.com.githubtreeview.network;
 
 import java.net.HttpRetryException;
 
-import ankit.com.githubtreeview.model.Items;
 import retrofit2.Response;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.Observable;

@@ -6,7 +6,6 @@ import com.google.gson.GsonBuilder;
 import java.util.List;
 
 import ankit.com.githubtreeview.BuildConfig;
-import ankit.com.githubtreeview.model.Items;
 import ankit.com.githubtreeview.model.Repo;
 import retrofit2.Response;
 import retrofit2.Retrofit;

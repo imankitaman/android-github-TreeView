@@ -3,7 +3,7 @@ package ankit.com.githubtreeview;
 import android.app.Application;
 
 /**
- * Created by ankit on 18/03/17.
+ * Created by ankit
  */
 public class GitHubTreeViewApplication extends Application {
     private static Application instance;

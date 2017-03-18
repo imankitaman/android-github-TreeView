@@ -2,7 +2,6 @@ package ankit.com.githubtreeview.network;
 
 import java.util.List;
 
-import ankit.com.githubtreeview.model.Items;
 import ankit.com.githubtreeview.model.Repo;
 import retrofit2.Response;
 import retrofit2.http.GET;
